@@ -1,0 +1,20 @@
+<div class="flex my-4">
+  <div class="w-1/2 h-12 mr-4">
+    <h1 class="text-2xl font-bold text-gray-900" data-controller="hello" data-target="hello.output">Lists</h1>
+    <% @lists.each do |list| %>
+      <div class="max-w-sm rounded-lg overflow-hidden shadow-lg cursor-pointer hover:shadow-xl">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2"><%= list.name %></div>
+          <p class="font-medium uppercase text-tighter text-indigo-700 text-xs">
+            <%= list.user.email %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to 'New List', '#', class: "bg-indigo-700 hover:bg-indigo-900 text-white font-bold text-sm py-2 px-4 mt-4 rounded" %>
+  </div>
+  <div class="w-1/2 h-12 ml-4">
+    The other stuff!
+  </div>
+</div>

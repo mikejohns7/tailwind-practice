@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'httparty'
 gem 'clearance'
+gem 'faker'
 
 group :development, :test do
   gem 'rspec-rails'

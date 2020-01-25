@@ -1,0 +1,18 @@
+<nav class="flex items-center justify-between flex-wrap bg-indigo-800 px-8 py-3 mb-4">
+  <div class="flex items-center text-white mr-6">
+    <span class="font-semibold text-xl tracking-tight">Tail To Do</span>
+  </div>
+  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+    <div class="w-full block flex items-center w-auto">
+      <div>
+        <% if signed_in? %>
+          <%= link_to "Lists", lists_path, class: "inline-block text-white hover:text-indigo-200 mr-4" %>
+          <%= link_to "Sign Out", sign_out_path, method: :delete, class: "inline-block text-white hover:text-indigo-200" %>
+        <% else %>
+          <%= link_to "Sign Up", sign_up_path, class: "text-white hover:text-indigo-800" %>
+          <%= link_to "Sign In", sign_in_path, class: "text-white hover:text-indigo-800" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

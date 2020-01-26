@@ -1,25 +1,65 @@
 <div class="flex">
   <div class="w-1/3 h-12">
     <% @lists.each do |list| %>
-    <%= link_to(list, class: "block max-w-sm pl-2 mb-2 overflow-hidden cursor-pointer hover:bg-gray-200") do %>
-      <div class="">
-        <div class="py-2">
-          <div class="font-semibold text-xl mb-1"><%= list.name %></div>
-          <p class="font-bold uppercase text-tighter text-indigo-700 text-xs">
-            <%= pluralize(list.tasks.count, 'task') %> <span class="text-gray-600"> &bull; <%= list.user.email %></span>
-          </p>
+      <%= link_to(list, class: "block w-48 pl-2 overflow-hidden cursor-pointer hover:bg-gray-200") do %>
+        <div class="">
+          <div class="py-2">
+            <div class="font-semibold text-lg mb-1"><%= list.name %></div>
+            <p class="font-bold uppercase text-tighter text-indigo-700 text-xs">
+              <%= pluralize(list.tasks.count, 'task') %>
+            </p>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
     <% end %>
 
-    <%= link_to 'New List', new_list_path, class: "bg-indigo-700 hover:bg-indigo-900 text-white font-bold text-sm ml-2 py-2 px-4 mt-4 rounded inline-block" %>
+    <div class="w-48 mt-6 mb-2 border-b-2">
+      <p class="font-bold uppercase text-tighter text-gray-500 text-xs">
+        Projects
+      </p>
+    </div>
+
+    <% @lists.each do |list| %>
+      <%= link_to(list, class: "block w-48 pl-2 overflow-hidden cursor-pointer hover:bg-gray-200") do %>
+        <div class="">
+          <div class="py-2">
+            <div class="font-semibold text-lg mb-1"><%= list.name %></div>
+            <p class="font-bold uppercase text-tighter text-indigo-700 text-xs">
+              <%= pluralize(list.tasks.count, 'task') %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= link_to 'Create List', new_list_path, class: "pl-2 font-bold uppercase text-tighter text-indigo-700 text-xs hover:shadow" %>
+
+    <div class="w-48 mt-6 mb-2 border-b-2">
+      <p class="font-bold uppercase text-tighter text-gray-500 text-xs">
+        Tags
+      </p>
+    </div>
+
+    <% @lists.each do |list| %>
+      <%= link_to(list, class: "block w-48 pl-2 overflow-hidden cursor-pointer hover:bg-gray-200") do %>
+        <div class="">
+          <div class="py-2">
+            <div class="font-semibold text-lg mb-1"><%= list.name %></div>
+            <p class="font-bold uppercase text-tighter text-indigo-700 text-xs">
+              <%= pluralize(list.tasks.count, 'task') %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+
   </div>
 
   <div class="w-2/3 h-12 pl-6">
     <div class="bg-white py-4 rounded shadow">
       <% @tasks.each do |task| %>
-      <div class="mb-4 px-6 py-1 cursor-pointer hover:bg-gray-100 <%= "pl-5 border-l-4 border-orange-500" if task.high? %>" data-controller="task" data-action="click->task#reveal">
+      <div class="px-6 py-4 cursor-pointer hover:bg-gray-100" data-controller="task" data-action="click->task#reveal">
         <div class="flex items-center relative">
           <div class="h-6 w-6 text-gray-400 hover:text-indigo-700">
             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -27,15 +67,23 @@
             </svg>
           </div>
           <div class="ml-4">
-            <div class="text-lg text-gray-800">
+            <div class="font-semibold text-md text-gray-900">
               <%= task.title %>
             </div>
+            <%= link_to('#', class: "px-2 font-bold uppercase text-tighter text-indigo-700 text-xs rounded-full border-2 border-indigo-700 hover:text-white hover:bg-indigo-700") do %>
+              AIRTABLE
+              <div class="h-2 w-2 hidden hover:inline-block">
+                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/>
+                </svg>
+              </div>
+            <% end %>
             <div class="font-semibold tracking-tighter text-xs text-indigo-700">
               <%= task.target_date %>
             </div>
           </div>
 
-          <div class="flex items-center absolute right-0 ">
+          <div class="flex items-center absolute right-0">
             <%= link_to('#', class: "h-4 w-4 mr-4 text-gray-400 cursor-pointer hover:text-indigo-700 relative right-0") do %>
             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M1 4c0-1.1.9-2 2-2h14a2 2 0 012 2v14a2 2 0 01-2 2H3a2 2 0 01-2-2V4zm2 2v12h14V6H3zm2-6h2v2H5V0zm8 0h2v2h-2V0zM5 9h2v2H5V9zm0 4h2v2H5v-2zm4-4h2v2H9V9zm0 4h2v2H9v-2zm4-4h2v2h-2V9zm0 4h2v2h-2v-2z"/>
@@ -47,12 +95,6 @@
                 <path d="M7.667 12H2v8H0V0h12l.333 2H20l-3 6 3 6H8l-.333-2z"/>
               </svg>
             <% end %>
-
-            <!-- <div class="h-6 w-6 text-gray-400 cursor-pointer hover:text-indigo-700" data-output="task.disclosed">
-              <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-              </svg>
-            </div> -->
           </div>
           </div>
 
@@ -61,17 +103,24 @@
         <div class="text-gray-600 text-sm pl-10 py-2 hidden" data-target="task.notes">
           <%= task.notes %>
 
-          <div class="flex">
+          <!-- <div class="flex">
             <%= link_to 'Move', '#', class: "bg-transparent hover:bg-indigo-700 text-indigo-700 hover:text-white py-2 px-4 border-2 border-indigo-700 hover:border-transparent rounded font-bold text-sm mt-4" %>
 
             <%= link_to 'Reassign', '#', class: "ml-6 bg-transparent hover:bg-indigo-700 text-indigo-700 hover:text-white py-2 px-4 border-2 border-indigo-700 hover:border-transparent rounded font-bold text-sm mt-4" %>
-          </div>
+          </div> -->
         </div>
       </div>
 
       <% end %>
 
-      <%= link_to 'Add Task', '#', class: "ml-6 bg-indigo-700 hover:bg-indigo-900 text-white font-bold text-sm py-2 px-4 mt-4 rounded inline-block" %>
+      <div class="flex pl-6 py-4" data-controller="search">
+        <input class="ml-10 bg-white placeholder-gray-500 focus:outline-none border-b-2 border-gray-400 py-1 block w-3/5 appearance-none leading-normal focus:border-indigo-700" placeholder="Quick Add (Press '/')" data-target="search.field" data-action="keydown@document->search#focus">
+        <p class="pl-6 pt-3 font-bold uppercase text-tighter text-gray-400 text-xs invisible" data-target="search.hint">
+          Return to save
+        </p>
+      </div>
+
+      <%# <%= link_to 'Add Task', '#', class: "ml-6 bg-indigo-700 hover:bg-indigo-900 text-white font-bold text-sm py-2 px-4 mt-4 rounded inline-block" %>
     </div>
   </div>
 </div>

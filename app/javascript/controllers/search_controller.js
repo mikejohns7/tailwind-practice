@@ -10,15 +10,17 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "field" ]
+  static targets = [ "field", "hint" ]
 
   focus(e) {
     console.log(e.keyCode);
     if (e.keyCode == 191) {
       e.preventDefault();
       this.fieldTarget.focus();
+      this.hintTarget.classList.toggle("invisible");
     } else if (e.keyCode == 27) {
       this.fieldTarget.blur();
+      this.hintTarget.classList.toggle("invisible");
     }
   }
 }

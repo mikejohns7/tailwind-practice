@@ -2,15 +2,21 @@
   <div class="flex items-center text-white mr-6">
     <span class="font-semibold text-2xl text-indigo-800 tracking-tight">Tail To Do</span>
   </div>
+  <div class="flex">
+    <input class="bg-white focus:outline-none focus:shadow-outline border-2 border-gray-300 rounded py-2 px-4 block w-64 appearance-none leading-normal" placeholder="Quick Add (Press '/')" data-controller="search" data-target="search.field" data-action="keydown@document->search#focus">
+    <%= link_to 'Save', '#', class: "ml-2 bg-transparent hover:bg-indigo-700 text-indigo-700 hover:text-white py-2 px-4 border-2 border-indigo-700 hover:border-transparent rounded font-bold text-sm" %>
+  </div>
   <div class="block flex">
     <div class="w-full block flex items-center w-auto">
       <div>
         <% if signed_in? %>
-          <%= link_to "Lists", lists_path, class: "inline-block text-indigo-800 hover:text-indigo-200 mr-4" %>
-          <%= link_to "Sign Out", sign_out_path, method: :delete, class: "inline-block text-indigo-800 hover:text-indigo-200" %>
+          <%= link_to "Lists", lists_path, class: "inline-block font-bold text-sm text-indigo-800 hover:text-indigo-400 mr-4" %>
+          <%= link_to "All Tasks", '#', class: "inline-block font-bold text-sm text-indigo-800 hover:text-indigo-400 mr-4" %>
+          <%= link_to "Settings", '#', class: "inline-block font-bold text-sm text-indigo-800 hover:text-indigo-400 mr-4" %>
+          <%= link_to "Sign Out", sign_out_path, method: :delete, class: "inline-block font-bold text-sm text-indigo-800 hover:text-indigo-400" %>
         <% else %>
-          <%= link_to "Sign Up", sign_up_path, class: "text-indigo-800 hover:text-indigo-800" %>
-          <%= link_to "Sign In", sign_in_path, class: "text-indigo-800 hover:text-indigo-800" %>
+          <%= link_to "Sign Up", sign_up_path, class: "font-bold text-sm text-indigo-800 hover:text-indigo-400" %>
+          <%= link_to "Sign In", sign_in_path, class: "font-bold text-sm text-indigo-800 hover:text-indigo-400" %>
         <% end %>
       </div>
     </div>

@@ -5,7 +5,7 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    @lists = List.all
+    @lists = List.all.order(:id)
     @tasks = @list.tasks.where.not(complete: true)
   end
 

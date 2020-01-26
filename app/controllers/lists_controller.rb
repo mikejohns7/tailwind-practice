@@ -4,6 +4,9 @@ class ListsController < ApplicationController
   end
 
   def show
+    @list = List.find(params[:id])
+    @lists = List.all
+    @tasks = @list.tasks.where.not(complete: true)
   end
 
   def new

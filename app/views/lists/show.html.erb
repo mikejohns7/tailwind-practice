@@ -1,2 +1,59 @@
-<h1>Lists#show</h1>
-<p>Find me in app/views/lists/show.html.erb</p>
+<div class="flex">
+  <div class="w-1/3 h-12">
+    <h1 class="text-xl font-semibold text-gray-900 mb-6">Your Lists</h1>
+
+    <% @lists.each do |list| %>
+    <%= link_to(list, class: "block max-w-sm mb-2 overflow-hidden cursor-pointer hover:bg-indigo-100") do %>
+      <div class="">
+        <div class="py-2">
+          <div class="font-bold text-xl mb-1"><%= list.name %></div>
+          <p class="font-medium uppercase text-tighter text-indigo-700 text-xs">
+            <%= pluralize(list.tasks.count, 'task') %> <span class="text-gray-600"> &bull; <%= list.user.email %></span>
+          </p>
+        </div>
+      </div>
+    <% end %>
+    <% end %>
+
+    <%= link_to 'New List', new_list_path, class: "bg-indigo-700 hover:bg-indigo-900 text-white font-bold text-sm py-2 px-4 mt-4 rounded inline-block" %>
+  </div>
+
+  <div class="w-2/3 h-12 pl-6">
+    <h1 class="text-3xl font-semibold text-gray-900 mb-6" data-controller="list" data-target="list.output"><%= @list.name %></h1>
+
+    <div class="bg-white px-6 py-6 rounded shadow">
+      <% @tasks.each do |task| %>
+      <div class="mb-8" data-controller="task">
+        <div class="flex items-center">
+          <div class="h-6 w-6 text-gray-400 hover:text-indigo-700">
+            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M2.93 17.07A10 10 0 1117.07 2.93 10 10 0 012.93 17.07zm12.73-1.41A8 8 0 104.34 4.34a8 8 0 0011.32 11.32zM6.7 9.29L9 11.6l4.3-4.3 1.4 1.42L9 14.4l-3.7-3.7 1.4-1.42z"/>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <div class="text-lg text-gray-800">
+              <%= task.title %>
+            </div>
+            <div class="font-semibold tracking-tighter text-xs text-indigo-700">
+              <%= task.target_date %>
+            </div>
+          </div>
+
+          <div class="h-6 w-6 float-right text-gray-400 hover:text-indigo-700" data-action="click->task#reveal">
+            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="text-gray-600 text-sm pl-10 py-2 hidden" data-target="task.notes">
+          <%= task.notes %>
+        </div>
+      </div>
+
+      <% end %>
+
+      <%= link_to 'Add Task', '#', class: "bg-indigo-700 hover:bg-indigo-900 text-white font-bold text-sm py-2 px-4 mt-4 rounded inline-block" %>
+    </div>
+  </div>
+</div>

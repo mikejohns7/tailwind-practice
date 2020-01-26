@@ -10,9 +10,13 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "output" ]
+  static targets = [ "notes" ]
+
+  reveal() {
+    this.notesTarget.classList.toggle("hidden");
+  }
 
   connect() {
-    // this.outputTarget.textContent = 'Stimulus online'
+    console.log('Stimulus online');
   }
 }
